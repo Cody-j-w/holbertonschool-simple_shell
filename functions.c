@@ -10,7 +10,7 @@ char **tokenize(char *str, char *delim)
 {
 	size_t buffsize = 512;
 	char *temp = malloc(buffsize * sizeof(char));
-	char *tokens[1024];
+	char **tokens = malloc((buffsize * 2) * sizeof(char));
 	int i = 0;
 
 	if (str == NULL)
