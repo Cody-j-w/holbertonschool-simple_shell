@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <errno.h>
 
 int print_digit(int);
@@ -11,14 +12,16 @@ int print_digit(int);
  *
  * Return: 0 on success, error code otherwise
  */
-int main(int argc, char *argv[])
+int main(void)
 {
 	size_t buffsize = 1024;
 	char *buffer = malloc(buffsize * sizeof(char));
 	char *str_temp;
 	char *tokens[1024];
 	int i = 0;
-	int characters;
+	int status;
+	pid_t mypid;
+	pid_t cpid;
 	char *path;
 	char *paths[1024];
 	char *temp_path = malloc(buffsize * sizeof(char));
@@ -26,12 +29,15 @@ int main(int argc, char *argv[])
 	extern char **environ;
 
 	strcpy(command, "/");
+	mypid = getpid();
+	printf("process id: %d\n", mypid);
 	
 	while (environ[i] != NULL)
 	{
 		if (strncmp(environ[i], "PATH=", 5) == 0)
 		{
-			path = environ[i];
+			path = environ[i] + 5;
+			printf("%s\n", path);
 		}
 		i++;
 	}
@@ -51,38 +57,52 @@ int main(int argc, char *argv[])
 		perror("Buffer allocation failed.");
 		exit(1);
 	}
-	printf("$: ");
-	characters = getline(&buffer, &buffsize, stdin);
-	str_temp = strtok(buffer, " ");
-
-	while (str_temp != NULL)
+	while (!feof(stdin))
 	{
-		tokens[i] = str_temp;
-		str_temp = strtok(0, " ");
-		i++;
-	}
-	i--;
-	tokens[i][strlen(tokens[i]) - 1] = '\0';
-	printf("%s\n", tokens[i]);
-	strcat(command, tokens[0]);
-	i = 0;
+		printf("$: ");
+		getline(&buffer, &buffsize, stdin);
+		str_temp = strtok(buffer, " ");
 
-	while (paths[i] != NULL)
-	{
-		strcpy(temp_path, paths[i]);
-		printf("after strcpy: %s\n", temp_path);
-		strcat(temp_path, command);
-		if (access(temp_path, X_OK) == 0)
+		while (str_temp != NULL)
 		{
-			execve(temp_path, tokens, NULL);
+			tokens[i] = str_temp;
+			str_temp = strtok(0, " ");
+			i++;
+		}
+		tokens[i] = NULL;
+		i--;
+		tokens[i][strlen(tokens[i]) - 1] = '\0';
+		printf("%s\n", tokens[i]);
+		strcat(command, tokens[0]);
+		i = 0;
+		cpid = fork();
+		if (cpid == 0)
+		{
+		while (paths[i] != NULL)
+		{
+			strcpy(temp_path, paths[i]);
+			strcat(temp_path, command);
+			if (access(temp_path, X_OK) == 0)
+			{
+				execve(temp_path, tokens, environ);
+				exit(1);
+			}
+			else
+			{
+				strerror(errno);
+			}
+			i++;
+		}
 		}
 		else
 		{
-			strerror(errno);
+			wait(&status);
 		}
-		i++;
-	}
 	
+	}
+	free(buffer);
+	free(temp_path);
+	free(command);
 	
 
 	return (0);
