@@ -33,3 +33,17 @@ char **tokenize(char *str, char *delim)
 	return (tokens);
 
 }
+
+char *get_path(char **env)
+{
+	int i = 0;
+
+	while (env[i] != NULL)
+	{
+		if (strncmp(env[i], "PATH=", 5) == 0)
+		{
+			return (env[i] + 5);
+		}
+	}
+	return (0);
+}
