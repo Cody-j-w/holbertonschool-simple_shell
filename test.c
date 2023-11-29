@@ -59,6 +59,9 @@ int main(void)
 	}
 	while (!feof(stdin))
 	{
+		printf("command: %s\n", command);
+		printf("buffer: %s\n", buffer);
+		printf("path: %s\n", path);
 		printf("$: ");
 		getline(&buffer, &buffsize, stdin);
 		str_temp = strtok(buffer, " ");
@@ -98,7 +101,7 @@ int main(void)
 		{
 			wait(&status);
 		}
-	
+		strcpy(command, "/");	
 	}
 	free(buffer);
 	free(temp_path);
