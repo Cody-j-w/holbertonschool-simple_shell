@@ -17,6 +17,11 @@ char **tokenize(char *str, char *delim)
 	{
 		exit(1);
 	}
+	if (!temp || !tokens)
+	{
+		perror("Error: memory allocation failed");
+		exit(1);
+	}
 
 	temp = strtok(str, delim);
 	while (temp != NULL)
@@ -27,9 +32,9 @@ char **tokenize(char *str, char *delim)
 	}
 	tokens[i] = NULL;
 	i--;
-	if (tokens[i][strlen(tokens[i] - 1)] == '\n')
-		tokens[i][strlen(tokens[i] - 1)] = '\0';
-
+	if (tokens[i][strlen(tokens[i]) - 1] == '\n')
+		tokens[i][strlen(tokens[i]) - 1] = '\0';
+	free(temp);
 	return (tokens);
 
 }
@@ -44,6 +49,16 @@ char *get_path(char **env)
 		{
 			return (env[i] + 5);
 		}
+		i++;
+	}
+	return (0);
+}
+
+int exit_check(char *buff)
+{
+	if (strcmp(buff, "exit\n") == 0)
+	{
+		return (1);
 	}
 	return (0);
 }
