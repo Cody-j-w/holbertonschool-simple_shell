@@ -25,7 +25,7 @@ int main(void)
     }
     while (!feof(stdin))
     {
-        printf("$ ")
+        printf("$ ");
         getline(&buffer, &buffsize, stdin);
         if (exit_check(buffer) == 1)
         {
