@@ -24,7 +24,7 @@ void forkit(char **paths, char **tokens)
 	}
 	if (cpid == 0)
 	{	
-		if (access(tokens[0]) == 0)
+		if (access(tokens[0], X_OK) == 0)
 		{
 			execve(tokens[0], tokens, environ);
 			exit(0);
