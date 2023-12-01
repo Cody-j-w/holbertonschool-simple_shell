@@ -24,6 +24,11 @@ void forkit(char **paths, char **tokens)
 	}
 	if (cpid == 0)
 	{	
+		if (access(tokens[0], X_OK) == 0)
+		{
+			execve(tokens[0], tokens, environ);
+			exit(0);
+		}
 		while (paths[i] != NULL)
 		{
 			strcpy(temp_path, paths[i]);

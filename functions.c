@@ -9,7 +9,7 @@
 char **tokenize(char *str, char *delim)
 {
 	size_t buffsize = 512;
-	char *temp = malloc(buffsize * sizeof(char));
+	char *temp;
 	char **tokens = malloc((buffsize * 2) * sizeof(char));
 	int i = 0;
 
@@ -34,7 +34,6 @@ char **tokenize(char *str, char *delim)
 	i--;
 	if (tokens[i][strlen(tokens[i]) - 1] == '\n')
 		tokens[i][strlen(tokens[i]) - 1] = '\0';
-	free(temp);
 	return (tokens);
 
 }
@@ -61,4 +60,14 @@ int exit_check(char *buff)
 		return (1);
 	}
 	return (0);
+}
+
+void free_array(char **array)
+{
+	int i = 0;
+	while (array[i] != NULL)
+	{
+		free(array[i]);
+	}
+	free(array);
 }

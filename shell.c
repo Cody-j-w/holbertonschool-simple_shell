@@ -17,7 +17,6 @@ int main(void)
 
     path = get_path(environ);
     paths = tokenize(path, ":");
-
     if (buffer == NULL)
     {
         perror("Buffer allocation failed.");
@@ -28,18 +27,20 @@ int main(void)
         printf("$ ");
         getline(&buffer, &buffsize, stdin);
         if (exit_check(buffer) == 1)
-        {
             break;
-        }
-        else
-        {
-            tokens = tokenize(buffer, " ");
-            forkit(paths, tokens);
-        }
+
+        tokens = tokenize(buffer, " ");
+        fflush(stdout);
+        forkit(paths, tokens);
     }
-    free(path);
-    free(paths);
-    free(buffer);
-    free(tokens);
+    fflush(stdout);
+    if (path != NULL)
+        free(path);
+    if (paths != NULL)
+        free_array(paths);
+    if (buffer != NULL)
+        free(buffer);
+    if (tokens != NULL)
+        free_array(tokens);
     exit(0);
 }
