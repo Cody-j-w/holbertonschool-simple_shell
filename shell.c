@@ -37,10 +37,10 @@ int main(void)
     if (path != NULL)
         free(path);
     if (paths != NULL)
-        free(paths);
+        free_array(paths);
     if (buffer != NULL)
         free(buffer);
     if (tokens != NULL)
-        free(tokens);
+        free_array(tokens);
     exit(0);
 }
