@@ -10,9 +10,9 @@ int main(void)
 {
     size_t buffsize = 1024;
     char *buffer = malloc(buffsize * sizeof(char));
-    char *path = malloc(buffsize * sizeof(char));
-    char **paths;
-    char **tokens;
+    char *path = NULL;
+    char **paths = NULL;
+    char **tokens = NULL;
     extern char **environ;
 
     path = get_path(environ);
@@ -22,11 +22,11 @@ int main(void)
         perror("Buffer allocation failed.");
         exit(1);
     }
-    while (!feof(stdin))
+    while (1)
     {
         printf("$ ");
         getline(&buffer, &buffsize, stdin);
-        if (exit_check(buffer) == 1)
+        if (exit_check(buffer) == 1 || feof(stdin) != 0)
             break;
 
         tokens = tokenize(buffer, " ");
@@ -34,13 +34,8 @@ int main(void)
         forkit(paths, tokens);
     }
     fflush(stdout);
-    if (path != NULL)
-        free(path);
-    if (paths != NULL)
-        free_array(paths);
-    if (buffer != NULL)
-        free(buffer);
-    if (tokens != NULL)
-        free_array(tokens);
+    free_array(paths);
+    free(buffer);
+    free(path);
     exit(0);
 }
