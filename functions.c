@@ -46,7 +46,7 @@ char *get_path(char **env)
 	{
 		if (strncmp(env[i], "PATH=", 5) == 0)
 		{
-			return (env[i] + 5);
+			return (strdup(env[i] + 5));
 		}
 		i++;
 	}
@@ -68,6 +68,7 @@ void free_array(char **array)
 	while (array[i] != NULL)
 	{
 		free(array[i]);
+		i++;
 	}
 	free(array);
 }
