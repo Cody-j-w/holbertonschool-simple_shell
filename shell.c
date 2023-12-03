@@ -9,7 +9,6 @@
 int main(void)
 {
 	size_t buffsize = 1024;
-	int input = 0;
 	char *buffer = malloc(buffsize * sizeof(char));
 	char *path = NULL;
 	char **paths = NULL;
