@@ -12,5 +12,6 @@
   <ul>
     <li><b>SHELL.H</b> - header file for simple shell project. This header file includes the prototypes for all of our functions needed for the simple shell program</li>
     <li><b><u>FUNCTIONS.C</b></u> - helper functions for tokenizing strings including the user input and path</li>
-    <li><b><u>SHELL.C</b></u> - main function which contains infinite loop to continously prompt user for input</li>
+      <li><b><u>FORK.C</b></u> - fork function for initiating child process which executes user command 
+    <li><b><u>SHELL.C</b></u> - main function which contains infinite loop to continously prompt user for input, and ensures memory is managed correctly</li>
     </ul>
