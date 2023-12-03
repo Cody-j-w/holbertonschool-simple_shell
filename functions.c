@@ -9,15 +9,15 @@
 char **tokenize(char *str, char *delim)
 {
 	size_t buffsize = 512;
-	char *temp;
-	char **tokens = malloc((buffsize * 2) * sizeof(char));
+	char *temp = NULL;
+	char **tokens = malloc(buffsize * sizeof(char *));
 	int i = 0;
 
 	if (str == NULL)
 	{
 		exit(1);
 	}
-	if (!temp || !tokens)
+	if (!tokens)
 	{
 		perror("Error: memory allocation failed");
 		exit(1);
@@ -26,7 +26,7 @@ char **tokenize(char *str, char *delim)
 	temp = strtok(str, delim);
 	while (temp != NULL)
 	{
-		tokens[i] = temp;
+		tokens[i] = strdup(temp);
 		temp = strtok(0, delim);
 		i++;
 	}
@@ -55,7 +55,8 @@ char *get_path(char **env)
 
 int exit_check(char *buff)
 {
-	if (strcmp(buff, "exit\n") == 0)
+	int exit = strcmp(buff, "exit\n");
+	if (exit == 0)
 	{
 		return (1);
 	}
