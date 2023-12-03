@@ -14,7 +14,7 @@ void forkit(char **paths, char **tokens)
 	pid_t cpid;
 	int status;
 	int i = 0;
-	char *temp_path = malloc(64 * sizeof(char));
+	char temp_path[512];
         extern char **environ;
 	cpid = fork();
 	if (cpid == -1)
