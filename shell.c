@@ -9,6 +9,7 @@
 int main(void)
 {
 	size_t buffsize = 1024;
+	int input = 0;
 	char *buffer = malloc(buffsize * sizeof(char));
 	char *path = NULL;
 	char **paths = NULL;
@@ -24,7 +25,7 @@ int main(void)
 	}
 	while (1)
 	{
-		printf("$ ");
+		/*printf("$ ");*/
 		getline(&buffer, &buffsize, stdin);
 		if (exit_check(buffer) == 1 || feof(stdin) != 0)
 			break;
