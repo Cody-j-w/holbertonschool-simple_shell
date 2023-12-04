@@ -73,3 +73,37 @@ void free_array(char **array)
 	}
 	free(array);
 }
+
+char *space_check(char *str)
+{
+	int i = 0;
+	int space_count = 0;
+	int nonspace = 0;
+	int str_len = strlen(str);
+	char *newstr = NULL;
+
+	newstr = calloc(str_len, sizeof(char));
+	if (!newstr)
+	{
+		perror("Memory allocation failed.");
+		exit(1);
+	}
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ')
+		{
+			if (space_count == 0)
+			{
+				space_count++;
+				newstr[i] = str[i];
+			}
+		}
+		else{
+			space_count = 0;
+			nonspace++;
+			newstr[i] = str[i];
+		}
+		i++
+	}
+	return (newstr);
+}
