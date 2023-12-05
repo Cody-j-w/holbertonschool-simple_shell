@@ -12,6 +12,7 @@ char **tokenize(char *str, char *delim)
 	char *temp = NULL;
 	char **tokens = malloc(buffsize * sizeof(char *));
 	int i = 0;
+	int cmpcheck;
 
 	if (str == NULL)
 	{
@@ -26,6 +27,9 @@ char **tokenize(char *str, char *delim)
 	temp = strtok(str, delim);
 	while (temp != NULL)
 	{
+		cmpcheck = strcmp(temp, "\n");
+		if (cmpcheck == 0)
+			break;
 		tokens[i] = strdup(temp);
 		temp = strtok(0, delim);
 		i++;
@@ -56,7 +60,8 @@ char *get_path(char **env)
 int exit_check(char *buff)
 {
 	int exit = strcmp(buff, "exit\n");
-	if (exit == 0)
+	int exit_nonewline = strcmp(buff, "exit");
+	if (exit == 0 || exit_nonewline == 0)
 	{
 		return (1);
 	}
@@ -97,6 +102,10 @@ char *space_check(char *str)
 				space_count++;
 				newstr[i] = str[i];
 			}
+		}
+		else if (str[i] == '\n')
+		{
+			break;
 		}
 		else{
 			space_count = 0;
