@@ -103,7 +103,7 @@ char *space_check(char *str)
 			nonspace++;
 			newstr[i] = str[i];
 		}
-		i++
+		i++;
 	}
 	return (newstr);
 }
