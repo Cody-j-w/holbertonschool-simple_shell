@@ -15,37 +15,38 @@ void forkit(char **paths, char **tokens)
 	int status;
 	int i = 0;
 	char *temp_path = malloc(64 * sizeof(char));
-        extern char **environ;
-	cpid = fork();
-	if (cpid == -1)
+	extern char **environ;
+
+	if (access(tokens[0], X_OK) == 0)
+		temp_path = tokens[0];
+	if (temp_path != tokens[0])
 	{
-		perror("forkfail");
-		exit(EXIT_FAILURE);
-	}
-	if (cpid == 0)
-	{	
-		if (access(tokens[0], X_OK) == 0)
-		{
-			execve(tokens[0], tokens, environ);
-			exit(0);
-		}
 		while (paths[i] != NULL)
 		{
 			strcpy(temp_path, paths[i]);
 			strcat(temp_path, "/");
-                        strcat(temp_path, tokens[0]);
-                        if (access(temp_path, X_OK) == 0)
-                        {
-				execve(temp_path, tokens, environ);
-				exit(0);
-			}
-                        i++;
-                }
-		perror("Command not found\n");
-		exit(1);
+			strcat(temp_path, tokens[0]);
+			if (access(temp_path, X_OK) == 0)
+				break;
+			i++;
+		}
+	}
+	if (access(temp_path, X_OK) == 0)
+	{
+		cpid = fork();
+		if (cpid == 0)
+		{
+			execve(temp_path, tokens, environ);
+			exit(0);
+		}
+		else
+		{
+			wait(&status);
+		}
 	}
 	else
 	{
-		wait(&status);
+	perror("");
+	exit(1);
 	}
 }
