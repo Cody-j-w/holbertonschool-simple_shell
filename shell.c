@@ -23,7 +23,7 @@ int main(void)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf("$ ")
+			printf("$ ");
 		getline(&buffer, &buffsize, stdin);
 		if (exit_check(buffer) == 1 || feof(stdin) != 0)
 			break;
