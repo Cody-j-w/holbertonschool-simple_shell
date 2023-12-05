@@ -18,7 +18,7 @@ void forkit(char **paths, char **tokens)
 	extern char **environ;
 
 	if (access(tokens[0], X_OK) == 0)
-		strcpy(temp_path, tokens[0])
+		strcpy(temp_path, tokens[0]);
 	if (temp_path != tokens[0])
 	{
 		while (paths[i] != NULL)
