@@ -14,11 +14,11 @@ void forkit(char **paths, char **tokens)
 	pid_t cpid;
 	int status;
 	int i = 0;
-	char *temp_path = malloc(128 * sizeof(char));
+	char temp_path[128];
 	extern char **environ;
 
 	if (access(tokens[0], X_OK) == 0)
-		temp_path = tokens[0];
+		strcpy(temp_path, tokens[0])
 	if (temp_path != tokens[0])
 	{
 		while (paths[i] != NULL)
@@ -42,7 +42,6 @@ void forkit(char **paths, char **tokens)
 		else
 		{
 			wait(&status);
-			free(temp_path);
 		}
 	}
 	else
