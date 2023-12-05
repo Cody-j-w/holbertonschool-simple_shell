@@ -10,10 +10,7 @@ int main(void)
 {
 	size_t buffsize = 1024;
 	char *buffer = malloc(buffsize * sizeof(char));
-	char *path = NULL;
-	char *strcheck = NULL;
-	char **paths = NULL;
-	char **tokens = NULL;
+	char *path = NULL, *strcheck = NULL, **paths = NULL, **tokens = NULL;
 	extern char **environ;
 
 	path = get_path(environ);
@@ -25,6 +22,8 @@ int main(void)
 	}
 	while (1)
 	{
+		if (isatty(STDIN_FILENO))
+			printf("$ ")
 		getline(&buffer, &buffsize, stdin);
 		if (exit_check(buffer) == 1 || feof(stdin) != 0)
 			break;
