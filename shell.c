@@ -30,7 +30,7 @@ int main(void)
 		strcheck = space_check(buffer);
 		if (strcmp(strcheck, " ") == 0)
 			continue;
-		tokens = tokenize(buffer, " ");
+		tokens = tokenize(strcheck, " ");
 		fflush(stdout);
 		forkit(paths, tokens);
 		free_array(tokens);
