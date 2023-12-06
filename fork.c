@@ -23,15 +23,7 @@ void forkit(char **paths, char **tokens)
 	}
 	if (i != 100)
 	{
-		while (paths[i] != NULL)
-		{
-			strcpy(temp_path, paths[i]);
-			strcat(temp_path, "/");
-			strcat(temp_path, tokens[0]);
-			if (access(temp_path, X_OK) == 0)
-				break;
-			i++;
-		}
+		set_path(temp_path, paths, tokens);
 	}
 	if (access(temp_path, X_OK) == 0)
 	{
@@ -52,4 +44,17 @@ void forkit(char **paths, char **tokens)
 	exit(1);
 	}
 }
+void set_path(char *temp_path, char **paths, char **tokens)
+{
+	int i = 0;
 
+	while (paths[i] != NULL)
+	{
+		strcpy(temp_path, paths[i]);
+		strcat(temp_path, "/");
+		strcat(temp_path, tokens[0]);
+		if (access(temp_path, X_OK) == 0)
+			break;
+		i++;
+	}
+}
