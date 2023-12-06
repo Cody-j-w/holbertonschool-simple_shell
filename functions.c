@@ -100,7 +100,8 @@ char *space_check(char *str)
 			if (space_count == 0)
 			{
 				space_count++;
-				newstr[i] = str[i];
+				newstr[j] = str[i];
+				j++;
 			}
 		}
 		else if (str[i] == '\n')
