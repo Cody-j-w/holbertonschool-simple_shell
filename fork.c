@@ -12,16 +12,13 @@
 void forkit(char **paths, char **tokens)
 {
 	pid_t cpid;
-	int status, strcheck, i = 0;
+	int status, i = 0;
 	char temp_path[128];
 	extern char **environ;
 
 	if (access(tokens[0], X_OK) == 0)
-	{
 		strcpy(temp_path, tokens[0]);
-		strcheck = strcmp(temp_path, tokens[0]);
-	}
-	if (strcheck != 0)
+	if (temp != tokens[0])
 	{
 		while (paths[i] != NULL)
 		{
