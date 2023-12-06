@@ -28,7 +28,7 @@ int main(void)
 		if (exit_check(buffer) == 1 || feof(stdin) != 0)
 			break;
 		strcheck = space_check(buffer);
-		if (strcmp(strcheck, " ") == 0)
+		if (strcmp(strcheck, " ") == 0 || strcmp(strcheck, "") == 0)
 			continue;
 		tokens = tokenize(strcheck, " ");
 		fflush(stdout);
