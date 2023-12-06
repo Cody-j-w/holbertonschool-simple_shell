@@ -11,8 +11,7 @@
  */
 void forkit(char **paths, char **tokens)
 {
-	pid_t cpid;
-	int status, i = 0;
+	int i = 0;
 	char temp_path[128];
 	extern char **environ;
 
@@ -27,16 +26,7 @@ void forkit(char **paths, char **tokens)
 	}
 	if (access(temp_path, X_OK) == 0)
 	{
-		cpid = fork();
-		if (cpid == 0)
-		{
-			execve(temp_path, tokens, environ);
-			exit(0);
-		}
-		else
-		{
-			wait(&status);
-		}
+		execute(temp_path, tokens, environ);
 	}
 	else
 	{
@@ -57,4 +47,26 @@ void set_path(char *temp_path, char **paths, char **tokens)
 			break;
 		i++;
 	}
+}
+
+void execute(char *path, char **tokens, char **env)
+{
+	pid_t cpid;
+	int status;
+
+	cpid = fork();
+		if (cpid < 0)
+		{
+			perror("");
+			exit(1);
+		}
+		else if (cpid == 0)
+		{
+			execve(path, tokens, env);
+			exit(0);
+		}
+		else
+		{
+			wait(&status);
+		}
 }
