@@ -25,7 +25,7 @@ char **tokenize(char *str, char *delim)
 	}
 
 	temp = strtok(str, delim);
-	while (temp_path != NULL)
+	while (temp != NULL)
 	{
 		cmpcheck = strcmp(temp, "\n");
 		if (cmpcheck == 0)
