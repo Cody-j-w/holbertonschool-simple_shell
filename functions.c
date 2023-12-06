@@ -81,7 +81,7 @@ void free_array(char **array)
 
 char *space_check(char *str)
 {
-	int i = 0;
+	int i = 0, j = 0;
 	int space_count = 0;
 	int nonspace = 0;
 	int str_len = strlen(str);
@@ -110,7 +110,8 @@ char *space_check(char *str)
 		else{
 			space_count = 0;
 			nonspace++;
-			newstr[i] = str[i];
+			newstr[j] = str[i];
+			j++;
 		}
 		i++;
 	}
