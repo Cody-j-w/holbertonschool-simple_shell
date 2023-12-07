@@ -6,7 +6,7 @@
 #include <errno.h>
 #include <sys/wait.h>
 /**
- * forkit - check access to executable file after setting the path, and then execute
+ * forkit - check access to executable file after setting path, then execute
  * @paths: tokenized path to check access for
  * @tokens: tokenized user input that contains command
  * @env: environment
