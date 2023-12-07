@@ -9,11 +9,10 @@
  *
  *
  */
-void forkit(char **paths, char **tokens)
+void forkit(char **paths, char **tokens, char **env, char *prog, int count)
 {
 	int i = 0;
 	char temp_path[128];
-	extern char **environ;
 
 	if (access(tokens[0], X_OK) == 0)
 	{
@@ -26,16 +25,17 @@ void forkit(char **paths, char **tokens)
 	}
 	else if (i != 100 && paths == NULL)
 	{
-		perror("");
+		fprintf(stderr, "%s: %d: %s: not found\n",
+		prog, count, tokens[0])
 		exit(127);
 	}
 	if (access(temp_path, X_OK) == 0)
 	{
-		execute(temp_path, tokens, environ);
+		execute(temp_path, tokens, env);
 	}
 	else
 	{
-	perror("");
+	fprintf(stderr, "%s: %d: %s: not found\n", prog, count, tokens[0]);
 	exit(127);
 	}
 }
