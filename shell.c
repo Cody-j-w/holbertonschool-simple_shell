@@ -13,13 +13,10 @@ int main(int argc, char *argv[], char *envp[])
 	char *path = NULL, *strcheck = NULL, **paths = NULL, **tokens = NULL;
 
 	path = get_path(envp);
-	if (path[0] != '\0')
+	if (path_check != 0)
 		paths = tokenize(path, ":");
 	if (buffer == NULL)
-	{
-		perror("Buffer allocation failed.");
 		exit(1);
-	}
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
@@ -46,4 +43,14 @@ int main(int argc, char *argv[], char *envp[])
 	if (path != NULL)
 		free(path);
 	exit(0);
+}
+
+int path_check(char *str)
+{
+	if (str != NULL)
+	{
+		if (str[0] == '\0')
+			return (1);
+	}
+	return (0);
 }
