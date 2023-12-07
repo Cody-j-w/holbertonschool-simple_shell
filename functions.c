@@ -16,7 +16,7 @@ char **tokenize(char *str, char *delim)
 
 	if (str == NULL)
 	{
-		exit(1);
+		return (0);
 	}
 	if (!tokens)
 	{
@@ -71,12 +71,15 @@ int exit_check(char *buff)
 void free_array(char **array)
 {
 	int i = 0;
-	while (array[i] != NULL)
+	if (array != NULL)
 	{
-		free(array[i]);
-		i++;
+		while (array[i] != NULL)
+		{
+			free(array[i]);
+			i++;
+		}
+		free(array);
 	}
-	free(array);
 }
 
 char *space_check(char *str)
