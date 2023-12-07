@@ -29,7 +29,7 @@ int main(int argc, char *argv[], char *envp[])
 		{
 			tokens = tokenize(strcheck, " ");
 			fflush(stdout);
-			forkit(paths, tokens);
+			forkit(paths, tokens, envp, argv[0], argc);
 			free_array(tokens);
 			tokens = NULL;
 		}
