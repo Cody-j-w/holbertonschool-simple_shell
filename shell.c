@@ -15,6 +15,7 @@
 int main(int argc, char *argv[], char *envp[])
 {
 	size_t buffsize = 1024;
+	int status = 0;
 	char *buffer = malloc(buffsize * sizeof(char));
 	char *path = NULL, *strcheck = NULL, **paths = NULL, **tokens = NULL;
 
@@ -35,7 +36,9 @@ int main(int argc, char *argv[], char *envp[])
 		{
 			tokens = tokenize(strcheck, " ");
 			fflush(stdout);
-			forkit(paths, tokens, envp, argv[0], argc);
+			status = forkit(paths, tokens, envp, argv[0], argc);
+			if (status != 0)
+				break;
 			free_array(tokens);
 			tokens = NULL;
 		}
@@ -48,7 +51,7 @@ int main(int argc, char *argv[], char *envp[])
 	free(strcheck);
 	if (path != NULL)
 		free(path);
-	exit(0);
+	exit(status);
 }
 /**
  * path_check - check validity and existence of input string

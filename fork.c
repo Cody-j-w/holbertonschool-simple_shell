@@ -31,16 +31,17 @@ void forkit(char **paths, char **tokens, char **env, char *prog, int count)
 	{
 		fprintf(stderr, "%s: %d: %s: not found\n",
 		prog, count, tokens[0]);
-		exit(127);
+		return (127);
 	}
 	if (access(temp_path, X_OK) == 0)
 	{
 		execute(temp_path, tokens, env);
+		return (0);
 	}
 	else
 	{
 	fprintf(stderr, "%s: %d: %s: not found\n", prog, count, tokens[0]);
-	exit(127);
+	return (127);
 	}
 }
 /**

@@ -62,6 +62,10 @@ char *get_path(char **env)
 		{
 			return (strdup(env[i] + 5));
 		}
+		else if (strncmp(env[i], "PATH1=", 6) == 0)
+		{
+			return (0);
+		}
 		i++;
 	}
 	return (0);

@@ -3,7 +3,7 @@
 
 char **tokenize(char *, char *);
 char *get_path(char **);
-void forkit(char **, char **, char **, char *, int);
+int forkit(char **, char **, char **, char *, int);
 int exit_check(char *);
 int path_check(char *);
 void free_array(char **);
