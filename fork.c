@@ -13,7 +13,7 @@
  * @prog: name of program from command line arguments
  * @count: count for error code
  */
-void forkit(char **paths, char **tokens, char **env, char *prog, int count)
+int forkit(char **paths, char **tokens, char **env, char *prog, int count)
 {
 	int i = 0;
 	char temp_path[128];
