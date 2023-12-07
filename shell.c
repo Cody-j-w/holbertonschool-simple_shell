@@ -31,16 +31,16 @@ int main(int argc, char *argv[], char *envp[])
 			tokens = tokenize(strcheck, " ");
 			fflush(stdout);
 			status = forkit(paths, tokens, envp, argv[0], argc);
-			if (status != 0)
-				break;
 			free_array(tokens);
 			tokens = NULL;
+			if (status != 0)
+				break;
 		}
 		free(strcheck);
 		strcheck = NULL;
 	}
 	fflush(stdout);
-	free_array(paths);
+	free_arrays(paths);
 	free(buffer);
 	free(strcheck);
 	if (path != NULL)
