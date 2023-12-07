@@ -32,6 +32,7 @@ void forkit(char **paths, char **tokens, char **env, char *prog, int count)
 	if (access(temp_path, X_OK) == 0)
 	{
 		execute(temp_path, tokens, env);
+		return (0);
 	}
 	else
 	{
