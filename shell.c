@@ -40,7 +40,7 @@ int main(int argc, char *argv[], char *envp[])
 		strcheck = NULL;
 	}
 	fflush(stdout);
-	free_arrays(paths);
+	free_array(paths);
 	free(buffer);
 	free(strcheck);
 	if (path != NULL)
