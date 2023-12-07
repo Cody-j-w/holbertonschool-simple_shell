@@ -16,6 +16,7 @@ char **tokenize(char *str, char *delim)
 
 	if (str == NULL)
 	{
+		free(tokens);
 		return (0);
 	}
 	if (!tokens)
