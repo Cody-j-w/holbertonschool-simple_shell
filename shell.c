@@ -49,7 +49,7 @@ int path_check(char *str)
 {
 	if (str != NULL)
 	{
-		if (str[0] == '\0')
+		if (str[0] != '\0')
 			return (1);
 	}
 	return (0);
