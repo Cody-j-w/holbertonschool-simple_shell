@@ -5,7 +5,12 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include "shell.h"
-
+/**
+ * tokenize - separate AKA tokenize a string at the given delimiter
+ * @str: string to tokenize
+ * @delim: delimiter in string to replace with null byte
+ * Return: tokens array on success, exit on failure
+ */
 char **tokenize(char *str, char *delim)
 {
 	size_t buffsize = 512;
@@ -41,7 +46,11 @@ char **tokenize(char *str, char *delim)
 	return (tokens);
 
 }
-
+/**
+ * get_path - extract the path from environment
+ * @env: environmental variables
+ * Return: 0 on success
+ */
 char *get_path(char **env)
 {
 	int i = 0;
@@ -56,7 +65,11 @@ char *get_path(char **env)
 	}
 	return (0);
 }
-
+/**
+ * exit_check - checks if user input is "exit"
+ * @buff: buffer containing input string
+ * Return: 1 if exit, 0 if no exit
+ */
 int exit_check(char *buff)
 {
 	int exit = strcmp(buff, "exit\n");
@@ -67,7 +80,10 @@ int exit_check(char *buff)
 	}
 	return (0);
 }
-
+/**
+ * free_array - free memory allocation of arrays
+ * @array: array to be freed
+ */
 void free_array(char **array)
 {
 	int i = 0;
@@ -78,7 +94,11 @@ void free_array(char **array)
 	}
 	free(array);
 }
-
+/**
+ * space_check - check for and trim extra spaces and new lines
+ * @str: string to check for extra spaces
+ * Return: newstr on success, otherwise exit
+ */
 char *space_check(char *str)
 {
 	int i = 0, j = 0;
