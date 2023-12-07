@@ -5,7 +5,12 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include "shell.h"
-
+/**
+ * main - main function of shell program
+ * @argc: amount of arguments passed to main from command line
+ * @argv: arguments passed to main from command line
+ * @envp: environment
+ */
 int main(int argc, char *argv[], char *envp[])
 {
 	size_t buffsize = 1024;
@@ -44,7 +49,10 @@ int main(int argc, char *argv[], char *envp[])
 		free(path);
 	exit(0);
 }
-
+/**
+ * path_check - check validity and existence of input string
+ * @str: string to check
+ */
 int path_check(char *str)
 {
 	if (str != NULL)

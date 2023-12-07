@@ -6,8 +6,12 @@
 #include <errno.h>
 #include <sys/wait.h>
 /**
- *
- *
+ * forkit - check access to executable file after setting the path, and then execute
+ * @paths: tokenized path to check access for
+ * @tokens: tokenized user input that contains command
+ * @env: environment
+ * @prog: name of program from command line arguments
+ * @count: count for error code
  */
 void forkit(char **paths, char **tokens, char **env, char *prog, int count)
 {
@@ -39,6 +43,12 @@ void forkit(char **paths, char **tokens, char **env, char *prog, int count)
 	exit(127);
 	}
 }
+/**
+ * set_path - create executable path
+ * @temp_path: built executable path
+ * @paths: double pointer to array containing tokenized paths
+ * @tokens: double pointer to array containing tokenized user input string
+ */
 void set_path(char *temp_path, char **paths, char **tokens)
 {
 	int i = 0;
@@ -53,7 +63,12 @@ void set_path(char *temp_path, char **paths, char **tokens)
 		i++;
 	}
 }
-
+/**
+ * execute - execute command in new child process
+ * @path: executable pathway to command
+ * @tokens: double pointer to array containing tokenized user input string
+ * @env: environment
+ */
 void execute(char *path, char **tokens, char **env)
 {
 	pid_t cpid;
