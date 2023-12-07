@@ -29,13 +29,13 @@ int main(int argc, char *argv[], char *envp[])
 		if (isatty(STDIN_FILENO))
 			printf("$ ");
 		getline(&buffer, &buffsize, stdin);
+		env_check(buffer, envp);
 		if (exit_check(buffer) == 1 || feof(stdin) != 0)
 			break;
 		strcheck = space_check(buffer);
 		if (strcmp(strcheck, " ") != 0 && strcmp(strcheck, "") != 0)
 		{
 			tokens = tokenize(strcheck, " ");
-			fflush(stdout);
 			status = forkit(paths, tokens, envp, argv[0], argc);
 			free_array(tokens);
 			tokens = NULL;
@@ -45,7 +45,6 @@ int main(int argc, char *argv[], char *envp[])
 		free(strcheck);
 		strcheck = NULL;
 	}
-	fflush(stdout);
 	free_array(paths);
 	free(buffer);
 	free(strcheck);
@@ -66,4 +65,26 @@ int path_check(char *str)
 			return (1);
 	}
 	return (0);
+}
+
+/**
+ * env_check - prints environment variables if current buffered string is "env"
+ * @buff: the buffered string
+ * @env: the current environment
+*/
+
+void env_check(char *buff, char **env)
+{
+	int i = 0;
+	int check = strcmp(buff, "env");
+	int checknewline = strcmp(buff, "env\n");
+
+	if (check == 0 || checknewline == 0)
+	{
+		while (env[i] != NULL)
+		{
+			printf("%s\n", env[i]);
+			i++;
+		}
+	}
 }

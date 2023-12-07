@@ -12,6 +12,7 @@
  * @env: environment
  * @prog: name of program from command line arguments
  * @count: count for error code
+ * Return: the exit status of the child process
  */
 int forkit(char **paths, char **tokens, char **env, char *prog, int count)
 {
