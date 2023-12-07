@@ -10,6 +10,7 @@
  * @argc: amount of arguments passed to main from command line
  * @argv: arguments passed to main from command line
  * @envp: environment
+ * Return: Exit 0 on success, exit 1 on failure
  */
 int main(int argc, char *argv[], char *envp[])
 {
@@ -52,6 +53,7 @@ int main(int argc, char *argv[], char *envp[])
 /**
  * path_check - check validity and existence of input string
  * @str: string to check
+ * Return: 0 on success, 1 on failure
  */
 int path_check(char *str)
 {
