@@ -28,13 +28,14 @@ int main(void)
 		if (exit_check(buffer) == 1 || feof(stdin) != 0)
 			break;
 		strcheck = space_check(buffer);
-		if (strcmp(strcheck, " ") == 0 || strcmp(strcheck, "") == 0)
-			continue;
-		tokens = tokenize(strcheck, " ");
-		fflush(stdout);
-		forkit(paths, tokens);
-		free_array(tokens);
-		tokens = NULL;
+		if (strcmp(strcheck, " ") != 0 && strcmp(strcheck, "") != 0)
+		{
+			tokens = tokenize(strcheck, " ");
+			fflush(stdout);
+			forkit(paths, tokens);
+			free_array(tokens);
+			tokens = NULL;
+		}
 		free(strcheck);
 		strcheck = NULL;
 	}
@@ -42,6 +43,7 @@ int main(void)
 	free_array(paths);
 	free(buffer);
 	free(strcheck);
-	free(path);
+	if (path != NULL)
+		free(path);
 	exit(0);
 }

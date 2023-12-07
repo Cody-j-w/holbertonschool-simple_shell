@@ -20,9 +20,14 @@ void forkit(char **paths, char **tokens)
 		strcpy(temp_path, tokens[0]);
 		i = 100;
 	}
-	if (i != 100)
+	if (i != 100 && paths != NULL)
 	{
 		set_path(temp_path, paths, tokens);
+	}
+	else if (i != 100 && paths == NULL)
+	{
+		perror("");
+		exit(127);
 	}
 	if (access(temp_path, X_OK) == 0)
 	{
@@ -31,7 +36,7 @@ void forkit(char **paths, char **tokens)
 	else
 	{
 	perror("");
-	exit(1);
+	exit(127);
 	}
 }
 void set_path(char *temp_path, char **paths, char **tokens)
