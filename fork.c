@@ -26,7 +26,7 @@ void forkit(char **paths, char **tokens, char **env, char *prog, int count)
 	else if (i != 100 && paths == NULL)
 	{
 		fprintf(stderr, "%s: %d: %s: not found\n",
-		prog, count, tokens[0])
+		prog, count, tokens[0]);
 		exit(127);
 	}
 	if (access(temp_path, X_OK) == 0)
