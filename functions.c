@@ -49,11 +49,6 @@ char *get_path(char **env)
 
 	while (env[i] != NULL)
 	{
-		printf("Current env variable being checked: %s\n", env[i]);
-		if (strncmp(env[i], "PATH1=", 6) == 0)
-		{
-			return (0);
-		}
 		if (strncmp(env[i], "PATH=", 5) == 0)
 		{
 			return (strdup(env[i] + 5));
