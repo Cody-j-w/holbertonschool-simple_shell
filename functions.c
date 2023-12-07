@@ -75,6 +75,7 @@ int exit_check(char *buff)
 {
 	int exit = strcmp(buff, "exit\n");
 	int exit_nonewline = strcmp(buff, "exit");
+
 	if (exit == 0 || exit_nonewline == 0)
 	{
 		return (1);
@@ -88,6 +89,7 @@ int exit_check(char *buff)
 void free_array(char **array)
 {
 	int i = 0;
+
 	if (array != NULL)
 	{
 		while (array[i] != NULL)
@@ -132,7 +134,8 @@ char *space_check(char *str)
 		{
 			break;
 		}
-		else{
+		else
+		{
 			space_count = 0;
 			nonspace++;
 			newstr[j] = str[i];
