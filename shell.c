@@ -6,15 +6,15 @@
 #include <sys/wait.h>
 #include "shell.h"
 
-int main(void)
+int main(int argc, char *argv[], char *envp[])
 {
 	size_t buffsize = 1024;
 	char *buffer = malloc(buffsize * sizeof(char));
 	char *path = NULL, *strcheck = NULL, **paths = NULL, **tokens = NULL;
-	extern char **environ;
 
-	path = get_path(environ);
-	paths = tokenize(path, ":");
+	path = get_path(envp);
+	if (path[0] != '\0')
+		paths = tokenize(path, ":");
 	if (buffer == NULL)
 	{
 		perror("Buffer allocation failed.");
