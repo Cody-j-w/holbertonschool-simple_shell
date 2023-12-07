@@ -13,7 +13,7 @@ int main(int argc, char *argv[], char *envp[])
 	char *path = NULL, *strcheck = NULL, **paths = NULL, **tokens = NULL;
 
 	path = get_path(envp);
-	if (path_check != 0)
+	if (path_check(path) != 0)
 		paths = tokenize(path, ":");
 	if (buffer == NULL)
 		exit(1);
