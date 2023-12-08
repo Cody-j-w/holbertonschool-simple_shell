@@ -10,5 +10,5 @@ int path_check(char *);
 void free_array(char **);
 char *space_check(char *);
 void set_path(char *temp_path, char **paths, char **tokens);
-void execute(char *, char **, char **);
+int execute(char *, char **, char **);
 #endif

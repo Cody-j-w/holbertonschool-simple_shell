@@ -16,9 +16,12 @@
  */
 int forkit(char **paths, char **tokens, char **env, char *prog, int count)
 {
-	int i = 0;
+	int status = 0, i = 0;
 	char temp_path[128];
+	int env_check = strcmp(tokens[0], "env");
 
+	if (env_check == 0)
+		return (0);
 	if (access(tokens[0], X_OK) == 0)
 	{
 		strcpy(temp_path, tokens[0]);
@@ -36,7 +39,9 @@ int forkit(char **paths, char **tokens, char **env, char *prog, int count)
 	}
 	if (access(temp_path, X_OK) == 0)
 	{
-		execute(temp_path, tokens, env);
+		status = execute(temp_path, tokens, env);
+		if (status == 512)
+			return (2);
 		return (0);
 	}
 	else
@@ -71,7 +76,7 @@ void set_path(char *temp_path, char **paths, char **tokens)
  * @tokens: double pointer to array containing tokenized user input string
  * @env: environment
  */
-void execute(char *path, char **tokens, char **env)
+int execute(char *path, char **tokens, char **env)
 {
 	pid_t cpid;
 	int status;
@@ -90,5 +95,6 @@ void execute(char *path, char **tokens, char **env)
 		else
 		{
 			wait(&status);
+			return (status);
 		}
 }
