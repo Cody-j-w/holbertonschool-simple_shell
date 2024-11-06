@@ -24,3 +24,7 @@
 </p>
             </body>
             </html>
+
+### Contributors
+[Cody Walenciak](https://www.linkedin.com/in/cody-walenciak/)
+[Courtney Graham](https://www.linkedin.com/in/courtney-graham918/)
