@@ -7,6 +7,7 @@
   The program will search in the environment for the path in which the commands are stored, and execute that command via forking. 
   The shell will run on an infinite loop to continuously ask the user for input until they explicitly exit the program with CTRL+D or typing "exit".
   </p>
+  <p>Compile using GCC, and then simply run the output file to enter the shell.</p>
   <details>
     <summary><b>FILES:</b></summary>
     <ul>
